@@ -1,2 +1,2 @@
 # DataStructures
-Lesson in Data Structuresss
+Lesson in Data Structures
