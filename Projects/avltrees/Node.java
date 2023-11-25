@@ -4,8 +4,7 @@ public class Node {
     public Node right;
     public int level;
 
-    public Node(int val)
-    {
-        value = val;
+    public Node(int value) {
+        this.value = value;
     }
 }

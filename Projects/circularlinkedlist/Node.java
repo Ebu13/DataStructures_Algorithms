@@ -3,7 +3,6 @@ public class Node {
     public Node sonraki;
 
     public Node(int deger){
-
         this.deger = deger;
     }
 }

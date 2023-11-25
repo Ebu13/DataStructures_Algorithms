@@ -1,18 +1,51 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        // TODO code application logic here
-
+        Scanner scanner = new Scanner(System.in);
         CLinkedList daireselBagli = new CLinkedList();
 
-        daireselBagli.Ekle(10);
-        daireselBagli.Ekle(5);
-        daireselBagli.Ekle(8);
-        daireselBagli.Ekle(7);
+        while (true) {
+            System.out.println("\nMenü:");
+            System.out.println("1. Ekle");
+            System.out.println("2. Sil");
+            System.out.println("3. Dugum Bul");
+            System.out.println("4. Cikis");
+            System.out.print("Seciminizi girin: ");
 
-        daireselBagli.Sil(7);
-        System.out.print(daireselBagli.DugumBul(5));
-        System.out.print(daireselBagli.DugumBul(7));
+            int secim = scanner.nextInt();
+
+            switch (secim) {
+                case 1:
+                    System.out.print("Eklenecek degeri girin: ");
+                    int eklenecekDeger = scanner.nextInt();
+                    daireselBagli.Ekle(eklenecekDeger);
+                    break;
+
+                case 2:
+                    System.out.print("Silinecek degeri girin: ");
+                    int silinecekDeger = scanner.nextInt();
+                    daireselBagli.Sil(silinecekDeger);
+                    break;
+
+                case 3:
+                    System.out.print("Aranacak degeri girin: ");
+                    int aranacakDeger = scanner.nextInt();
+                    boolean bulundu = daireselBagli.DugumBul(aranacakDeger);
+                    if (bulundu) {
+                        System.out.println("Dugum bulundu.");
+                    } else {
+                        System.out.println("Dugum bulunamadi.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Programdan cikiliyor.");
+                    System.exit(0);
+
+                default:
+                    System.out.println("Gecersiz secim. Lutfen tekrar deneyin.");
+            }
+        }
     }
 }

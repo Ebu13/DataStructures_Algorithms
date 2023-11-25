@@ -1,82 +1,60 @@
+// CLinkedList.java
 public class CLinkedList {
     public Node ilk = null;
     public Node son = null;
 
-    public void Ekle(int deger)
-    {
+    public void Ekle(int deger) {
         Node yeniDugum = new Node(deger);
 
-        if(ilk == null)
-        {
+        if (ilk == null) {
             ilk = yeniDugum;
-        }
-        else
-        {
+            son = yeniDugum;
+        } else {
             son.sonraki = yeniDugum;
+            son = yeniDugum;
         }
 
         yeniDugum.sonraki = ilk;
-        son = yeniDugum;
-
     }
 
-    public boolean DugumBul(int arananDeger)
-    {
+    public boolean DugumBul(int arananDeger) {
         Node mevcutDugum = ilk;
 
-        if(ilk == null)
-            return false;
-        else
-        {
-            do{
+        while (mevcutDugum != null) {
+            if (mevcutDugum.deger == arananDeger)
+                return true;
 
-                if(mevcutDugum.deger == arananDeger)
-                    return true;
+            if (mevcutDugum == son)
+                break;
 
-                mevcutDugum = mevcutDugum.sonraki;
-            }while(mevcutDugum != ilk);
-
-            return false;
+            mevcutDugum = mevcutDugum.sonraki;
         }
+
+        return false;
     }
 
-    public void Sil(int silinecekDeger)
-    {
+    public void Sil(int silinecekDeger) {
         Node mevcutDugum = ilk;
 
-        if(ilk == null)
+        if (ilk == null)
             return;
-        else
-        {
-            do{
+        else {
+            do {
                 Node sonrakiDugum = mevcutDugum.sonraki;
-                if(sonrakiDugum.deger == silinecekDeger)
-                {
-                    if(ilk == son)
-                    {
-                        ilk = null;
-                        son = null;
+                if (sonrakiDugum.deger == silinecekDeger) {
+                    if (ilk == sonrakiDugum) {
+                        ilk = ilk.sonraki;
                     }
-                    else
-                    {
-                        mevcutDugum.sonraki = sonrakiDugum.sonraki;
 
-                        if(ilk == sonrakiDugum)
-                        {
-                            ilk = ilk.sonraki;
-                        }
-                        if(son == sonrakiDugum)
-                        {
-                            son = mevcutDugum;
-                        }
+                    mevcutDugum.sonraki = sonrakiDugum.sonraki;
+
+                    if (son == sonrakiDugum) {
+                        son = mevcutDugum;
                     }
                 }
 
                 mevcutDugum = sonrakiDugum;
-            }
-            while(mevcutDugum != ilk);
-
-
+            } while (mevcutDugum != ilk);
         }
     }
 }

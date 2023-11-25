@@ -1,117 +1,91 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class BinarySearchTree {
-    Node root;
+    private Node root;
 
+    public BinarySearchTree() {
+        this.root = null;
+    }
 
-    public void Insert(Node dugum, int deger)
-    {
-        Node newNode = new Node(deger);
-        if(root == null)
-        {
-            root = newNode;
+    public void insert(int value) {
+        root = insertRec(root, value);
+    }
+
+    private Node insertRec(Node root, int value) {
+        if (root == null) {
+            return new Node(value);
         }
-        else
-        {
-            if(deger < dugum.value)
-            {
-                if(dugum.left == null)
-                    dugum.left = newNode;
-                else
-                    Insert(dugum.left, deger);
-            }
-            else
-            {
-                if(dugum.right == null)
-                    dugum.right = newNode;
-                else
-                    Insert(dugum.right, deger);
-            }
+
+        if (value < root.value) {
+            root.left = insertRec(root.left, value);
+        } else if (value > root.value) {
+            root.right = insertRec(root.right, value);
+        }
+
+        return root;
+    }
+
+    public List<Integer> inOrder() {
+        List<Integer> result = new ArrayList<>();
+        inOrderRec(root, result);
+        return result;
+    }
+
+    private void inOrderRec(Node root, List<Integer> result) {
+        if (root != null) {
+            inOrderRec(root.left, result);
+            result.add(root.value);
+            inOrderRec(root.right, result);
         }
     }
 
-    public void inord(Node dugum)
-    {
-        if(dugum != null)
-        {
-            inord(dugum.left);
-            System.out.print(dugum.value);
-            inord(dugum.right);
-        }
-
+    public void delete(int key) {
+        root = deleteRec(root, key);
     }
 
-    public void PostOrder(Node dugum)
-    {
-        if(dugum != null)
-        {
-
-            PostOrder(dugum.left);
-            PostOrder(dugum.right);
-            System.out.print(dugum.value);
-
+    private Node deleteRec(Node root, int key) {
+        // Base Case: If the tree is empty
+        if (root == null) {
+            return root;
         }
-    }
 
-    public void PreOrder(Node dugum)
-    {
-        if(dugum != null)
-        {
-
-            System.out.print(dugum.value);
-            PreOrder(dugum.left);
-            PreOrder(dugum.right);
-
-        }
-    }
-
-    public Node delete(Node parent, int key)
-    {
-
-        if(parent.left == null && parent.right == null)
-            return null;
-
-        else
-        {
-            if(parent.value < key)
-            {
-                parent.right = delete(parent.right, key);
-                return null;
+        // Recursive Case: Traverse the tree to find the node to be deleted
+        if (key < root.value) {
+            root.left = deleteRec(root.left, key);
+        } else if (key > root.value) {
+            root.right = deleteRec(root.right, key);
+        } else {
+            // Node with only one child or no child
+            if (root.left == null) {
+                return root.right;
+            } else if (root.right == null) {
+                return root.left;
             }
-            else if(parent.value > key)
-            {
-                parent.left = delete(parent.left,key);
-                return null;
-            }
-            else
-            {
-                if(parent.left == null && parent.right == null)
-                {
-                    return null;
-                }
-                else if(parent.right != null)
-                {
-                    Node yeni = GetMinimumKey(parent.right, parent);
-                    yeni.left = parent.left;
-                    parent.left = null;
-                    return yeni;
-                }
-                else
-                {
-                    return parent.left;
-                }
-            }
+
+            // Node with two children: Get the inorder successor (smallest in the right subtree)
+            root.value = minValue(root.right);
+
+            // Delete the inorder successor
+            root.right = deleteRec(root.right, root.value);
         }
 
-
+        return root;
     }
 
-    public Node GetMinimumKey(Node node, Node parent)
-    {
-        if(node.left == null)
-        {
-
-            return node;
+    // Helper function to find the smallest value in a BST
+    private int minValue(Node root) {
+        int minValue = root.value;
+        while (root.left != null) {
+            minValue = root.left.value;
+            root = root.left;
         }
-        else
-            return GetMinimumKey(node.left, node);
+        return minValue;
+    }
+
+
+    public void displayInOrder() {
+        List<Integer> result = inOrder();
+        System.out.println("InOrder: " + result);
     }
 }

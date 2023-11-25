@@ -1,36 +1,49 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        // TODO code application logic here
-
+        Scanner scanner = new Scanner(System.in);
         BinarySearchTree tree = new BinarySearchTree();
-        tree.root = null;
-        tree.Insert(tree.root, 56);
-        tree.Insert(tree.root, 23);
-        tree.Insert(tree.root, 28);
-        tree.Insert(tree.root, 92);
-        tree.Insert(tree.root, 90);
-        tree.Insert(tree.root, 100);
-        tree.Insert(tree.root, 190);
 
-        System.out.println("\n InOrder:\n" );
-        tree.inord(tree.root);
+        int choice;
 
-        System.out.println("\n Post order:\n" );
-        tree.PostOrder(tree.root);
+        do {
+            System.out.println("\nBinary Search Tree Operations:");
+            System.out.println("1. Insert a node");
+            System.out.println("2. Delete a node");
+            System.out.println("3. Display InOrder");
+            System.out.println("4. Exit");
 
-        System.out.println("\n Pre order:\n" );
-        tree.PreOrder(tree.root);
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
 
-        tree.delete(tree.root, 92 );
-        System.out.println("\n InOrder:\n" );
-        tree.inord(tree.root);
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the value to insert: ");
+                    int insertValue = scanner.nextInt();
+                    tree.insert(insertValue);
+                    break;
 
-        System.out.println("\n Post order:\n" );
-        tree.PostOrder(tree.root);
+                case 2:
+                    System.out.print("Enter the value to delete: ");
+                    int deleteValue = scanner.nextInt();
+                    tree.delete(deleteValue);
+                    break;
 
-        System.out.println("\n Pre order:\n" );
-        tree.PreOrder(tree.root);
+                case 3:
+                    System.out.println("InOrder: " + tree.inOrder());
+                    break;
+
+                case 4:
+                    System.out.println("Exiting the program.");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option.");
+            }
+
+        } while (choice != 4);
+
+        scanner.close();
     }
 }
