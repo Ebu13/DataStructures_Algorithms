@@ -4,39 +4,13 @@ public class DoublyLinkedList {
 
     public void OneEkle(int deger)
     {
-        Node yeniDugum = new Node(deger);
-        yeniDugum.onceki = null;
-        yeniDugum.sonraki = ilk;
-
-        if(ilk!= null)
-        {
-            ilk.onceki = yeniDugum;
-        }
-
-        ilk = yeniDugum;
-    }
-
-    public void SonraEkle(Node oncekiDugum, int deger)
-    {
-        if(oncekiDugum == null)
-        {
-            System.out.print("Önceki düğüm null olamaz");
-            return;
-        }
-        Node sonrakiDugum=null;
-        Node yeniDugum=new Node(deger);
-        if (oncekiDugum.sonraki!=null){
-            sonrakiDugum=oncekiDugum.sonraki;
-        }
-
-        if (sonrakiDugum!=null){
-            yeniDugum.onceki=oncekiDugum;
-            yeniDugum.sonraki=sonrakiDugum;
-            sonrakiDugum.onceki=yeniDugum;
-            oncekiDugum.sonraki=sonrakiDugum;
-        }else{
-            oncekiDugum.sonraki=yeniDugum;
-            yeniDugum.onceki=oncekiDugum;
+        if (ilk!=null){
+            Node yeniDugum = new Node(deger);
+            yeniDugum.sonraki = ilk;
+            ilk.onceki=yeniDugum;
+        }else {
+            Node yeniDugum= new Node(deger);
+            ilk=yeniDugum;
         }
     }
 
@@ -54,29 +28,9 @@ public class DoublyLinkedList {
             {
                 temp = temp.sonraki;
             }
-
-            temp.sonraki = yeniDugum;
             yeniDugum.onceki = temp;
+            temp.sonraki = yeniDugum;
         }
-
-    }
-
-    public void OnceEkle(Node sonrakiDugum, int deger)
-    {
-        if(sonrakiDugum == null)
-        {
-            System.out.println("Sonraki Düğüm null olamaz");
-        }
-
-        Node yeniDugum = new Node(deger);
-
-        yeniDugum.onceki = sonrakiDugum.onceki;
-        sonrakiDugum.onceki = yeniDugum;
-        yeniDugum.sonraki = sonrakiDugum;
-        if(yeniDugum.onceki != null)
-            yeniDugum.onceki.sonraki = yeniDugum;
-        else
-            ilk = yeniDugum;
 
     }
 
@@ -118,5 +72,50 @@ public class DoublyLinkedList {
             return null;
         }
 
+    }
+
+    public void OnceEkle(Node sonrakiDugum, int deger)
+    {
+        if(sonrakiDugum == null)
+        {
+            System.out.println("Sonraki Düğüm null olamaz");
+            return;
+        }
+
+        Node yeniDugum = new Node(deger);
+        Node oncekiDugum;
+        if (sonrakiDugum.onceki!=null){
+            oncekiDugum=sonrakiDugum.onceki;
+            yeniDugum.onceki=oncekiDugum;
+            yeniDugum.sonraki=sonrakiDugum;
+            sonrakiDugum.onceki=yeniDugum;
+            oncekiDugum.sonraki=yeniDugum;
+        }else{
+            this.OneEkle(deger);
+        }
+    }
+
+    public void SonraEkle(Node oncekiDugum, int deger)
+    {
+        if(oncekiDugum == null)
+        {
+            System.out.print("Önceki düğüm null olamaz");
+            return;
+        }
+        Node sonrakiDugum=null;
+        Node yeniDugum=new Node(deger);
+        if (oncekiDugum.sonraki!=null){
+            sonrakiDugum=oncekiDugum.sonraki;
+        }
+
+        if (sonrakiDugum!=null){
+            yeniDugum.onceki=oncekiDugum;
+            yeniDugum.sonraki=sonrakiDugum;
+            sonrakiDugum.onceki=yeniDugum;
+            oncekiDugum.sonraki=sonrakiDugum;
+        }else{
+            oncekiDugum.sonraki=yeniDugum;
+            yeniDugum.onceki=oncekiDugum;
+        }
     }
 }
