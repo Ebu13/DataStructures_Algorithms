@@ -23,38 +23,41 @@ public class DoublyLinkedList {
             System.out.print("Önceki düğüm null olamaz");
             return;
         }
+        Node sonrakiDugum=null;
+        Node yeniDugum=new Node(deger);
+        if (oncekiDugum.sonraki!=null){
+            sonrakiDugum=oncekiDugum.sonraki;
+        }
 
-        Node yeniDugum = new Node(deger);
-        yeniDugum.sonraki = oncekiDugum.sonraki;
-        oncekiDugum.sonraki = yeniDugum;
-        yeniDugum.onceki = oncekiDugum;
-
-        if(yeniDugum.sonraki != null)
-            yeniDugum.sonraki.onceki = yeniDugum;
+        if (sonrakiDugum!=null){
+            yeniDugum.onceki=oncekiDugum;
+            yeniDugum.sonraki=sonrakiDugum;
+            sonrakiDugum.onceki=yeniDugum;
+            oncekiDugum.sonraki=sonrakiDugum;
+        }else{
+            oncekiDugum.sonraki=yeniDugum;
+            yeniDugum.onceki=oncekiDugum;
+        }
     }
 
     public void SonaEkle(int deger)
     {
         Node yeniDugum = new Node(deger);
 
-        yeniDugum.sonraki = null;
-
-        Node son = ilk;
-
         if(ilk == null)
         {
-            yeniDugum.onceki = null;
             ilk = yeniDugum;
             return;
-        }
+        }else{
+            Node temp=ilk;
+            while(temp.sonraki!= null)
+            {
+                temp = temp.sonraki;
+            }
 
-        while(son.sonraki!= null)
-        {
-            son = son.sonraki;
+            temp.sonraki = yeniDugum;
+            yeniDugum.onceki = temp;
         }
-
-        son.sonraki = yeniDugum;
-        yeniDugum.onceki = son;
 
     }
 
@@ -77,34 +80,43 @@ public class DoublyLinkedList {
 
     }
 
-    public void Gezinme()
+    public void Yazdir()
     {
-        Node son = ilk;
+        Node temp = ilk;
 
-        while(son.sonraki != null)
-        {
-            System.out.println(son.deger);
-            son = son.sonraki;
+        try{
+            while(temp.sonraki != null)
+            {
+                System.out.println(temp.deger);
+                temp = temp.sonraki;
+            }
+
+            System.out.println(temp.deger);
+        }catch (NullPointerException exception){
+            System.out.println("\n"+exception.getMessage()+"\nListe boş..");
         }
-
-        System.out.println(son.deger);
     }
 
     public Node Bul(int arananDeger)
     {
-        Node son = ilk;
+        Node temp = ilk;
+        try {
+            while(temp.sonraki != null)
+            {
+                if(temp.deger == arananDeger)
+                    return temp;
 
-        while(son.sonraki != null)
-        {
-            if(son.deger == arananDeger)
-                return son;
+                temp = temp.sonraki;
+            }
 
-            son = son.sonraki;
+            if(temp.deger == arananDeger)
+                return temp;
+
+            return null;
+        }catch (NullPointerException nullPointerException){
+            System.out.println(nullPointerException.getMessage()+"\nListe Boş");
+            return null;
         }
 
-        if(son.deger == arananDeger)
-            return son;
-
-        return null;
     }
 }

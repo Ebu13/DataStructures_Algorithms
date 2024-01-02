@@ -1,41 +1,55 @@
 import java.util.Scanner;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
         DoublyLinkedList list = new DoublyLinkedList();
-
-        list.OneEkle(5);
-        list.OneEkle(6);
-        list.OneEkle(10);
-        list.OneEkle(8);
-        list.OneEkle(12);
-
-
-        list.SonaEkle(20);
-
-        list.SonaEkle(44);
-
-        list.SonaEkle(55);
-
-        Node arananDugum = list.Bul(5);
-
-        list.SonraEkle(arananDugum, 100);
-        list.OnceEkle(arananDugum, 86);
-
-        list.Gezinme();
-
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Adınızı Girin:");
-
-        String ad = sc.nextLine();
-
-        System.out.println("Soyadınızı Girin:");
-
-        String soyad = sc.nextLine();
-
+        System.out.println("Sistemimize Hoşgeldiniz...");
+        int secim;
+        boolean cikis = true;
+        while (cikis) {
+            System.out.print("\n1.Öne Ekle\n2.Sona Ekle\n3.Önce Ekle\n4.Sonra Ekle\n5.Yazdir\n6.Bul\n7.Çıkış\nSeçimin = ");
+            secim=scanner.nextInt();
+            switch (secim){
+                case 1 :
+                    System.out.print("\nÖne Eklenecek Sayıyı Gir = ");
+                    list.OneEkle(scanner.nextInt());
+                    break;
+                case 2 :
+                    System.out.print("\nSona Eklenecek Sayıyı Gir = ");
+                    list.SonaEkle(scanner.nextInt());
+                    break;
+                case 3 :
+                    System.out.print("\nÖnce Eklenecek Sayıyı Gir = ");
+                    int eklenecek=scanner.nextInt();
+                    System.out.print("\nHangi Sayıdan Önce Eklensin = ");
+                    int hangi = scanner.nextInt();
+                    list.OnceEkle(list.Bul(eklenecek),hangi);
+                    break;
+                case 4 :
+                    System.out.print("\nÖnce Eklenecek Sayıyı Gir = ");
+                    int eklen=scanner.nextInt();
+                    System.out.print("\nHangi Sayıdan Sonra Eklensin = ");
+                    int han = scanner.nextInt();
+                    list.SonraEkle(list.Bul(han),eklen);
+                    break;
+                case 5 :
+                    list.Yazdir();
+                    break;
+                case 6 :
+                    System.out.print("\nBulunacak Sayıyı Gir = ");
+                    int bulunacaksayi=scanner.nextInt();
+                    if (list.Bul(bulunacaksayi)!=(null)){
+                        System.out.println("Sayı Bulundu..");
+                    }else {
+                        System.out.println("Bulunamadı..");
+                    }
+                    break;
+                case 7 :
+                    System.out.print("\nÇıkış Yapılıyor..");
+                    cikis=false;
+                    break;
+            }
+        }
     }
 }
