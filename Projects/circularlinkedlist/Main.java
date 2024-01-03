@@ -1,19 +1,27 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         CLinkedList daireselBagli = new CLinkedList();
-
-        while (true) {
+        boolean cikis=true;
+        while (cikis) {
             System.out.println("\nMenü:");
             System.out.println("1. Ekle");
             System.out.println("2. Sil");
             System.out.println("3. Dugum Bul");
             System.out.println("4. Cikis");
+            System.out.println("5. Yazdir");
             System.out.print("Seciminizi girin: ");
-
-            int secim = scanner.nextInt();
+            int secim = 0;
+            try {
+                secim = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println(e.getMessage()+"\nInvalid input. Please enter a valid integer.");
+                scanner.nextLine();
+                continue;
+            }
 
             switch (secim) {
                 case 1:
@@ -31,18 +39,18 @@ public class Main {
                 case 3:
                     System.out.print("Aranacak degeri girin: ");
                     int aranacakDeger = scanner.nextInt();
-                    boolean bulundu = daireselBagli.DugumBul(aranacakDeger);
-                    if (bulundu) {
-                        System.out.println("Dugum bulundu.");
-                    } else {
-                        System.out.println("Dugum bulunamadi.");
+                    if (daireselBagli.ara(aranacakDeger)!=null){
+                        System.out.println("Bulundu");
                     }
                     break;
 
                 case 4:
                     System.out.println("Programdan cikiliyor.");
-                    System.exit(0);
-
+                    cikis=false;
+                    break;
+                case 5:
+                    daireselBagli.yazdir();
+                    break;
                 default:
                     System.out.println("Gecersiz secim. Lutfen tekrar deneyin.");
             }

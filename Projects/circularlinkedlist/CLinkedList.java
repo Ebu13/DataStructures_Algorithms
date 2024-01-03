@@ -1,60 +1,57 @@
-// CLinkedList.java
 public class CLinkedList {
-    public Node ilk = null;
-    public Node son = null;
+    private Node bas;
 
+    public Node getBas() {
+        return bas;
+    }
     public void Ekle(int deger) {
         Node yeniDugum = new Node(deger);
 
-        if (ilk == null) {
-            ilk = yeniDugum;
-            son = yeniDugum;
+        if (bas == null) {
+            bas = yeniDugum;
+            bas.onceki = bas;
+            bas.sonraki = bas;
         } else {
-            son.sonraki = yeniDugum;
-            son = yeniDugum;
+            yeniDugum.sonraki = bas;
+            yeniDugum.onceki = bas.onceki;
+            bas.onceki.sonraki = yeniDugum;
+            bas.onceki = yeniDugum;
+            bas = yeniDugum;
         }
-
-        yeniDugum.sonraki = ilk;
     }
 
-    public boolean DugumBul(int arananDeger) {
-        Node mevcutDugum = ilk;
-
-        while (mevcutDugum != null) {
-            if (mevcutDugum.deger == arananDeger)
-                return true;
-
-            if (mevcutDugum == son)
-                break;
-
-            mevcutDugum = mevcutDugum.sonraki;
+    public void yazdir() {
+        if (bas == null) {
+            System.out.println("Liste boş.");
+            return;
         }
 
-        return false;
+        Node current = bas;
+        do {
+            System.out.println(current.deger);
+            current = current.sonraki;
+        } while (current != bas);
+    }
+
+    public Node ara(int hedef) {
+        if (bas == null) {
+            System.out.println("Liste boş.");
+            return null;
+        }
+
+        Node current = bas;
+        do {
+            if (current.deger == hedef)
+                return current;
+
+            current = current.sonraki;
+        } while (current != bas);
+
+        System.out.println("Düğüm bulunamadı.");
+        return null;
     }
 
     public void Sil(int silinecekDeger) {
-        Node mevcutDugum = ilk;
 
-        if (ilk == null)
-            return;
-        else {
-            do {
-                Node sonrakiDugum = mevcutDugum.sonraki;
-                if (sonrakiDugum.deger == silinecekDeger) {
-                    if (ilk == sonrakiDugum) {
-                        ilk = ilk.sonraki;
-                    }
-
-                    mevcutDugum.sonraki = sonrakiDugum.sonraki;
-
-                    if (son == sonrakiDugum) {
-                        son = mevcutDugum;
-                    }
-                }
-
-                mevcutDugum = sonrakiDugum;
-            } while (mevcutDugum != ilk);
-        }
     }
 }
