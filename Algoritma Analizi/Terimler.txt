@@ -1,0 +1,2 @@
+dominating set
+set cover
