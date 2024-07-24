@@ -1,2 +1,4 @@
 dominating set
 set cover
+
+(önemli değil)
