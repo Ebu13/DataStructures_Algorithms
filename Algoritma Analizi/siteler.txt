@@ -1,0 +1,5 @@
+https://www.freecodecamp.org/news/big-o-cheat-sheet-time-complexity-chart/
+https://bilgisayarkavramlari.com/2010/06/17/karmasiklik-siniflari-complexity-classes/#:~:text=Karma%C5%9F%C4%B1kl%C4%B1k%20S%C4%B1n%C4%B1flar%C4%B1%20%28Complexity%20Classes%29%201%20K%C3%BC%C3%A7%C3%BCk-o%20%28small-o%29%202,omega%20%28big-%CE%A9%20%29%205%20K%C3%BC%C3%A7%C3%BCk%20omega%20%28small-%CF%89%20%29
+https://www.geeksforgeeks.org/problem-reduction-in-transform-and-conquer-technique/
+https://bilgisayarkavramlari.com/2008/08/09/siralama-algoritmalari-sorting-algorithms/
+https://medium.com/@muhammedyucedag/algoritmalar-ve-%C3%A7e%C5%9Fitleri-problemleri-%C3%A7%C3%B6zmenin-temel-yollar%C4%B1-d7fd7e6125bd
