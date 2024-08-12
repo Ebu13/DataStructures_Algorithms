@@ -1,0 +1,23 @@
+iterative recursion amortite analiz
+
+bilinen problemlere indirgeme
+
+veri yapısı icat etme
+
+böl ve yönet 
+
+greedy 
+
+dinamik programlama
+
+stokastik yaklaşım genetik
+
+Yaklaşık yapay sinir ağları
+
+yığıt 
+
+ikili sayıcı
+
+potansiyel yöntemler
+
+muhasebe
